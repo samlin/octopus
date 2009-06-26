@@ -1,5 +1,6 @@
 package com.lxitedu.discuz.dao;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -9,17 +10,33 @@ import com.lxitedu.framework.model.ConnectionProperty;
 
 public class DiscuzDAO extends SuperDAO {
   public void addUser() {
+    PreparedStatement preStat = null;
+    StringBuffer sqlStat = new StringBuffer();
     QueryRunner run = new QueryRunner();
-    try {
-      // Create an object array to hold the values to insert
-      Object[] insertParams = { "John Doe", new Double(1.82) };
-      // Execute the SQL update statement and return the number of
-      // inserts that were made
-      run.update(conn, "INSERT INTO Person (name,height) VALUES (?,?)",
-          insertParams);
-    } catch (SQLException sqle) {
-      sqle.printStackTrace();
-    }
+    Integer nextID = 0;//getNextPrimaryID();
+    sqlStat.append("INSERT ");
+    sqlStat.append("INTO   CDB_UC_MEMBERS(uid, username, password, email, myid, myidkey, regip, regdate, lastloginip, lastlogintime, salt, secques) ");
+    sqlStat.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
+//    preStat = conn.prepareStatement(sqlStat.toString(), ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+//    setPrepareStatement(preStat, 1, nextID);
+//    setPrepareStatement(preStat, 2, tmpCdbUcMembers.getUsername());
+//    setPrepareStatement(preStat, 3, tmpCdbUcMembers.getPassword());
+//    setPrepareStatement(preStat, 4, tmpCdbUcMembers.getEmail());
+//    setPrepareStatement(preStat, 5, tmpCdbUcMembers.getMyid());
+//    setPrepareStatement(preStat, 6, tmpCdbUcMembers.getMyidkey());
+//    setPrepareStatement(preStat, 7, tmpCdbUcMembers.getRegip());
+//    setPrepareStatement(preStat, 8, tmpCdbUcMembers.getRegdate());
+//    setPrepareStatement(preStat, 9, tmpCdbUcMembers.getLastloginip());
+//    setPrepareStatement(preStat, 10, tmpCdbUcMembers.getLastlogintime());
+//    setPrepareStatement(preStat, 11, tmpCdbUcMembers.getSalt());
+//    setPrepareStatement(preStat, 12, tmpCdbUcMembers.getSecques());
+//    setPrepareStatement(preStat, 7, GlobalConstant.RECORD_STATUS_ACTIVE);
+//    setPrepareStatement(preStat, 8, new Integer(0));
+//    setPrepareStatement(preStat, 9, sessionContainer.getUserRecordID());
+//    setPrepareStatement(preStat, 10, currTime);
+//    setPrepareStatement(preStat, 11, sessionContainer.getUserRecordID());
+//    setPrepareStatement(preStat, 12, currTime);
+//    preStat.executeUpdate();
 
   }
 

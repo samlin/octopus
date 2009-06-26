@@ -8,7 +8,7 @@ public class Entry {
     String[] initializeData = getGeneralParametar();
 
     // generalAll(subject);
-     new GenerateBean(subject);
+//     new GenerateBean(subject);
      new GenerateDAO(subject);
     // //
 

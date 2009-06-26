@@ -122,7 +122,6 @@ public class GenerateBean extends BaseGenerate implements Observer {
     out.println(" */");
     out.println("package " + packageName + ".bean;");
     out.println();
-    out.println("import com.dcivision.framework.bean.AbstractBaseObject;");
     out.println();
     out.println("/**");
     out.println("  " + className + ".java");
@@ -130,14 +129,14 @@ public class GenerateBean extends BaseGenerate implements Observer {
     out.println("  This class is the serializable bean reflecting business logic uses.");
     out.println();
     out.println("    @author           " + author);
-    out.println("    @company          DCIVision Limited");
+    out.println("    @company          Lxit Trainning");
     out.println("    @creation date    "
         + (now.get(Calendar.DAY_OF_MONTH) < 10 ? ("0" + now.get(Calendar.DAY_OF_MONTH)) : ("" + now
             .get(Calendar.DAY_OF_MONTH))) + "/" + month[now.get(Calendar.MONTH)] + "/" + now.get(Calendar.YEAR));
     out.println("    @version          $Revision: 1.20 $");
     out.println("*/");
     out.println();
-    out.println("public class " + className + " extends AbstractBaseObject {");
+    out.println("public class " + className + "  {");
     out.println();
     out.println("  public static final String REVISION = \"$Revision: 1.20 $\";");
     out.println();

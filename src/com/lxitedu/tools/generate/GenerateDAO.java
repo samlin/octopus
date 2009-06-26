@@ -16,6 +16,7 @@ import java.util.Calendar;
 
 
 import com.lxitedu.tools.generate.subject.Subject;
+import com.mysql.jdbc.Connection;
 
 /**
  * GenerateDAO.java
@@ -51,63 +52,6 @@ public class GenerateDAO extends BaseGenerate {
     }
   }
 
-  public static void printValidation() throws Exception {
-    out.println("  protected void validateInsert(AbstractBaseObject obj) throws ApplicationException {");
-    out.println("  }");
-    out.println();
-    out.println("  protected void validateUpdate(AbstractBaseObject obj) throws ApplicationException {");
-    out.println("  }");
-    out.println();
-    out.println("  protected void validateDelete(AbstractBaseObject obj) throws ApplicationException {");
-    out.println("  }");
-    out.println();
-  }
-
-  public static void printAuditTrail() throws Exception {
-    out
-        .println("  protected synchronized void auditTrail(String opMode, AbstractBaseObject obj) throws ApplicationException {");
-    out.println("    Vector oldValues = new Vector();");
-    out.println("    Vector newValues = new Vector();");
-    out.println("    " + className + " tmp" + className + " = (" + className + ")this.oldValue;");
-    out.println();
-    out.println("    if (tmp" + className + " != null) {");
-    for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-      out.println("      oldValues.add(toAuditTrailValue(tmp" + className + ".get"
-          + getVariableName(rsmd.getColumnName(i), true) + "()));");
-    }
-    out.println("    }");
-    out.println();
-
-    out.println("    tmp" + className + " = (" + className + ")obj;");
-    out.println("    if (tmp" + className + " != null) {");
-    for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-      out.println("      newValues.add(toAuditTrailValue(tmp" + className + ".get"
-          + getVariableName(rsmd.getColumnName(i), true) + "()));");
-    }
-    out.println("    }");
-    out.println();
-    out.println("    auditTrailBase(opMode, oldValues, newValues);");
-    out.println("  }");
-    out.println();
-  }
-
-  public static void printWarning() throws Exception {
-    out.println("  /***********************************************************************");
-    out.println("   * DON'T Modify the codes above unless you know what you are doing!!!  *");
-    out.println("   * Put your own functions beblow.                                      *");
-    out.println("   * For FINDER methods, the function name should be in the notation:    *");
-    out.println("   *   public Object getObjectBy<Criteria>()                             *");
-    out.println("   *   - e.g. public Object getObjectByCode()                            *");
-    out.println("   *   public List getListBy<Criteria>()                                 *");
-    out.println("   *   - e.g. public List getListByUserID()                              *");
-    out.println("   * For OPERATION methods, the function name should be in the notation: *");
-    out.println("   *   public void <Operation>ObjectBy<Criteria>()                       *");
-    out.println("   *   - e.g. public void deleteObjectByCode()                           *");
-    out.println("   *   public void <Operation>ListBy<Criteria>()                         *");
-    out.println("   *   - e.g. public void deleteListByUserID()                           *");
-    out.println("   ***********************************************************************/");
-    out.println();
-  }
 
   public static void printDeleteObject() throws Exception {
     out
@@ -222,15 +166,13 @@ public class GenerateDAO extends BaseGenerate {
 
   public static void printCreateObject() throws Exception {
     out
-        .println("  protected synchronized AbstractBaseObject insert(AbstractBaseObject obj) throws ApplicationException {");
+        .println("  protected synchronized "+className+" insert("+className+" obj)   {");
     out.println("    PreparedStatement preStat = null;");
     out.println("    StringBuffer sqlStat = new StringBuffer();");
-    out.println("    " + className + " tmp" + className + " = (" + className + ")((" + className + ")obj).clone();");
     out.println();
     out.println("    synchronized(dbConn) {");
     out.println("      try {");
     out.println("        " + JAVA_INTEGER + " nextID = getNextPrimaryID();");
-    out.println("        Timestamp currTime = Utility.getCurrentTimestamp();");
     out.println("        sqlStat.append(\"INSERT \");");
     out.print("        sqlStat.append(\"INTO   " + tableName.toUpperCase() + "(");
     for (int i = 1; i <= rsmd.getColumnCount(); i++) {
@@ -254,45 +196,20 @@ public class GenerateDAO extends BaseGenerate {
       if (i == 1) {
         out.println("        setPrepareStatement(preStat, 1, nextID);");
       } else if (exceptionFields.get(rsmd.getColumnName(i).toUpperCase()) == null) {
-        out.println("        setPrepareStatement(preStat, " + i + ", tmp" + className + ".get"
+        out.println("        setPrepareStatement(preStat, " + i + ",obj" + ".get"
             + getVariableName(rsmd.getColumnName(i), true) + "());");
       }
     }
-
-    int endIdx = rsmd.getColumnCount() - 4;
-    if (hasRecordStatus) {
-      endIdx--;
-      out.println("        setPrepareStatement(preStat, " + (endIdx++) + ", GlobalConstant.RECORD_STATUS_ACTIVE);");
-    }
-    out.println("        setPrepareStatement(preStat, " + (endIdx++) + ", new Integer(0));");
-    out.println("        setPrepareStatement(preStat, " + (endIdx++) + ", sessionContainer.getUserRecordID());");
-    out.println("        setPrepareStatement(preStat, " + (endIdx++) + ", currTime);");
-    out.println("        setPrepareStatement(preStat, " + (endIdx++) + ", sessionContainer.getUserRecordID());");
-    out.println("        setPrepareStatement(preStat, " + (endIdx++) + ", currTime);");
     out.println("        preStat.executeUpdate();");
-    out.println("        tmp" + className + ".set" + getIDFieldName() + "(nextID);");
-    out.println("        tmp" + className + ".setCreatorID(sessionContainer.getUserRecordID());");
-    out.println("        tmp" + className + ".setCreateDate(currTime);");
-    out.println("        tmp" + className + ".setUpdaterID(sessionContainer.getUserRecordID());");
-    out.println("        tmp" + className + ".setUpdateDate(currTime);");
-    out.println("        tmp" + className + ".setUpdateCount(new Integer(0));");
-    out.println("        tmp" + className + ".setCreatorName(UserInfoFactory.getUserFullName(tmp" + className
-        + ".getCreatorID()));");
-    out.println("        tmp" + className + ".setUpdaterName(UserInfoFactory.getUserFullName(tmp" + className
-        + ".getUpdaterID()));");
-    out.println("        return(tmp" + className + ");");
-    out.println("      } catch (ApplicationException appEx) {");
-    out.println("        throw appEx;");
-    out.println("      } catch (SQLException sqle) {");
-    out.println("        log.error(sqle, sqle);");
-    out.println("        throw new ApplicationException(ErrorConstant.DB_GENERAL_ERROR, sqle, sqle.toString());");
-    out.println("      } catch (Exception e) {");
-    out.println("        log.error(e, e);");
-    out.println("        throw new ApplicationException(ErrorConstant.DB_INSERT_ERROR, e);");
+    
+    out.println("        return obj;");
+    out.println("      } catch (Exception Ex) {");
+    out.println("        Ex.printStackTrace();");
     out.println("      } finally {");
     out.println("        try { preStat.close(); } catch (Exception ignore) {} finally { preStat = null; }");
     out.println("      }");
     out.println("    }");
+    out.println(" return obj;");
     out.println("  }");
     out.println();
   }
@@ -353,171 +270,8 @@ public class GenerateDAO extends BaseGenerate {
     out.println();
   }
 
-  public static void printGetList() throws Exception {
-    out.println("  protected synchronized List getList(AbstractSearchForm searchForm) throws ApplicationException {");
-    out.println("    PreparedStatement preStat = null;");
-    out.println("    PreparedStatement preStatCnt = null;");
-    out.println("    ResultSet rs = null;");
-    out.println("    ResultSet rsCnt = null;");
-    out.println("    StringBuffer sqlStat = new StringBuffer();");
-    out.println("    StringBuffer sqlStatCnt = new StringBuffer();");
-    out.println("    List result = new ArrayList();");
-    out.println("    int totalNumOfRecord = 0;");
-    out.println("    int rowLoopCnt = 0;");
-    out.println("    int startOffset = TextUtility.parseInteger(searchForm.getCurStartRowNo());");
-    out.println("    int pageSize = TextUtility.parseInteger(searchForm.getPageOffset());");
-    out.println();
-    out.println("    synchronized(dbConn) {");
-    out.println("      try {");
-    out.print("        sqlStat.append(\"SELECT ");
-    for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-      out.print("A." + rsmd.getColumnName(i));
-      if (i != rsmd.getColumnCount()) {
-        out.print(", ");
-      }
-    }
-    out.println(" \");");
-    out.println("        sqlStat.append(\"FROM   " + tableName.toUpperCase() + " A \");");
-    out.println("        sqlStat.append(\"WHERE  A.recordStatus = ? \");");
-    out.println();
-    out.println("        // Form the WHERE clause for filtering.");
-    out.println("        if (searchForm.isSearchable()) {");
-    out.println("          String searchField = getSearchColumn(searchForm.getBasicSearchField());");
-    out
-        .println("          sqlStat.append(\"AND  \" + searchField + \" \" + searchForm.getBasicSearchType() + \" ? \");");
-    out.println("        }");
-    out.println();
-    out.println("        //format the sql for any 'LIKE' statement contained");
-    out.println("        sqlStat = this.getFormattedSQL(sqlStat.toString());");
-    out.println();
-    out.println("        // Form the ORDER clause for sorting.");
-    out.println("        if (searchForm.isSortable()) {");
-    out.println("          String sortAttribute = searchForm.getSortAttribute();");
-    out.println("          if (sortAttribute.indexOf(\".\") < 0) {");
-    out.println("            sortAttribute = \"A.\" + sortAttribute;");
-    out.println("          }");
-    out.println("          sqlStat.append(\"ORDER BY \" + sortAttribute + \" \" + searchForm.getSortOrder());");
-    out.println("        }");
-    out.println();
-    out.println("        // Get total number of record return.");
-    out.println("        sqlStatCnt = this.getSelectCountSQL(sqlStat);");
-    out
-        .println("        preStatCnt = dbConn.prepareStatement(sqlStatCnt.toString(), ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);");
-    out.println("        this.setPrepareStatement(preStatCnt, 1, GlobalConstant.RECORD_STATUS_ACTIVE);");
-    out.println("        if (searchForm.isSearchable()) {");
-    out
-        .println("          String searchKeyword = this.getFormattedKeyword(searchForm.getBasicSearchKeyword(), searchForm.getBasicSearchType());");
-    out.println("          this.setPrepareStatement(preStatCnt, 2, searchKeyword);");
-    out.println("        }");
-    out.println("        rsCnt = preStatCnt.executeQuery();");
-    out.println("        if (rsCnt.next()) {");
-    out.println("          totalNumOfRecord = rsCnt.getInt(1);");
-    out.println("        }");
-    out.println("        try { rsCnt.close(); } catch (Exception ignore) {} finally { rsCnt = null; }");
-    out.println("        try { preStatCnt.close(); } catch (Exception ignore) {} finally { preStatCnt = null; }");
-    out.println();
-    out.println("        // Retrieve the result in row basis.");
-    out.println("        sqlStat = this.getSelectListSQL(sqlStat, startOffset, pageSize);");
-    out
-        .println("        preStat = dbConn.prepareStatement(sqlStat.toString(), ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);");
-    out.println("        this.setPrepareStatement(preStat, 1, GlobalConstant.RECORD_STATUS_ACTIVE);");
-    out.println("        if (searchForm.isSearchable()) {");
-    out
-        .println("          String searchKeyword = this.getFormattedKeyword(searchForm.getBasicSearchKeyword(), searchForm.getBasicSearchType());");
-    out.println("          this.setPrepareStatement(preStat, 2, searchKeyword);");
-    out.println("        }");
-    out.println("        rs = preStat.executeQuery();");
-    out.println();
-    out.println("        this.positionCursor(rs, startOffset, pageSize);");
-    out.println();
-    out.println("        while (rs.next() && rowLoopCnt<pageSize) {");
-    out.println("          " + className + " tmp" + className + " = new " + className + "();");
-    for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-      out.println("          tmp" + className + ".set" + getVariableName(rsmd.getColumnName(i), true) + "(getResultSet"
-          + getJavaType(rsmd, i, true) + "(rs, \"" + rsmd.getColumnName(i) + "\"));");
-    }
-    out.println("          tmp" + className + ".setCreatorName(UserInfoFactory.getUserFullName(tmp" + className
-        + ".getCreatorID()));");
-    out.println("          tmp" + className + ".setUpdaterName(UserInfoFactory.getUserFullName(tmp" + className
-        + ".getUpdaterID()));");
-    out.println("          tmp" + className + ".setRecordCount(totalNumOfRecord);");
-    out.println("          tmp" + className + ".setRowNum(startOffset++);");
-    out.println("          ++rowLoopCnt;");
-    out.println("          result.add(tmp" + className + ");");
-    out.println("        }");
-    out.println("        return(result);");
-    out.println("      } catch (ApplicationException appEx) {");
-    out.println("        throw appEx;");
-    out.println("      } catch (SQLException sqle) {");
-    out.println("        log.error(sqle, sqle);");
-    out.println("        throw new ApplicationException(ErrorConstant.DB_GENERAL_ERROR, sqle, sqle.toString());");
-    out.println("      } catch (Exception e) {");
-    out.println("        log.error(e, e);");
-    out.println("        throw new ApplicationException(ErrorConstant.DB_SELECT_ERROR, e);");
-    out.println("      } finally {");
-    out.println("        try { rs.close(); } catch (Exception ignore) {} finally { rs = null; }");
-    out.println("        try { preStat.close(); } catch (Exception ignore) {} finally { preStat = null; }");
-    out.println("        try { rsCnt.close(); } catch (Exception ignore) {} finally { rsCnt = null; }");
-    out.println("        try { preStatCnt.close(); } catch (Exception ignore) {} finally { preStatCnt = null; }");
-    out.println("      }");
-    out.println("    }");
-    out.println("  }");
-    out.println();
-  }
-
-  public static void printGetList1() throws Exception {
-    out.println("  protected synchronized List getList() throws ApplicationException {");
-    out.println("    PreparedStatement preStat = null;");
-    out.println("    ResultSet rs = null;");
-    out.println("    StringBuffer sqlStat = new StringBuffer();");
-    out.println("    List result = new ArrayList();");
-    out.println();
-    out.println("    synchronized(dbConn) {");
-    out.println("      try {");
-    out.print("        sqlStat.append(\"SELECT ");
-    for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-      out.print("A." + rsmd.getColumnName(i));
-      if (i != rsmd.getColumnCount()) {
-        out.print(", ");
-      }
-    }
-    out.println(" \");");
-    out.println("        sqlStat.append(\"FROM   " + tableName.toUpperCase() + " A \");");
-    out.println("        sqlStat.append(\"WHERE  A.recordStatus = ? \");");
-    out
-        .println("        preStat = dbConn.prepareStatement(sqlStat.toString(), ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);");
-    out.println("        this.setPrepareStatement(preStat, 1, GlobalConstant.RECORD_STATUS_ACTIVE);");
-    out.println("        rs = preStat.executeQuery();");
-    out.println("        while (rs.next()) {");
-    out.println("          " + className + " tmp" + className + " = new " + className + "();");
-    for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-      out.println("          tmp" + className + ".set" + getVariableName(rsmd.getColumnName(i), true) + "(getResultSet"
-          + getJavaType(rsmd, i, true) + "(rs, \"" + rsmd.getColumnName(i) + "\"));");
-    }
-    out.println("          tmp" + className + ".setCreatorName(UserInfoFactory.getUserFullName(tmp" + className
-        + ".getCreatorID()));");
-    out.println("          tmp" + className + ".setUpdaterName(UserInfoFactory.getUserFullName(tmp" + className
-        + ".getUpdaterID()));");
-    out.println("          result.add(tmp" + className + ");");
-    out.println("        }");
-    out.println("        return(result);");
-    out.println("      } catch (ApplicationException appEx) {");
-    out.println("        throw appEx;");
-    out.println("      } catch (SQLException sqle) {");
-    out.println("        log.error(sqle, sqle);");
-    out.println("        throw new ApplicationException(ErrorConstant.DB_GENERAL_ERROR, sqle, sqle.toString());");
-    out.println("      } catch (Exception e) {");
-    out.println("        log.error(e, e);");
-    out.println("        throw new ApplicationException(ErrorConstant.DB_SELECT_ERROR, e);");
-    out.println("      } finally {");
-    out.println("        try { rs.close(); } catch (Exception ignore) {} finally { rs = null; }");
-    out.println("        try { preStat.close(); } catch (Exception ignore) {} finally { preStat = null; }");
-    out.println("      }");
-    out.println("    }");
-    out.println("  }");
-    out.println();
-  }
-
+  
+  
   public static String getIDFieldName() throws Exception {
     return ("ID");
   }
@@ -540,11 +294,8 @@ public class GenerateDAO extends BaseGenerate {
     out.println("package " + packageName + ".dao;");
     out.println();
     out.println("import java.sql.*;");
+    out.println("import com.lxitedu.framework.dao.SuperDAO;");
     out.println("import java.util.*;");
-    out.println("import com.dcivision.framework.*;");
-    out.println("import com.dcivision.framework.bean.*;");
-    out.println("import com.dcivision.framework.dao.*;");
-    out.println("import com.dcivision.framework.web.*;");
     out.println("import " + packageName + ".bean.*;");
     out.println();
     out.println("/**");
@@ -561,21 +312,16 @@ public class GenerateDAO extends BaseGenerate {
     out.println("*/");
     out.println();
 
-    out.println("public class " + className + "DAObject extends LXAbstractDAObject {");
+    out.println("public class " + className + "DAObject  extends SuperDAO {");
     out.println();
     out.println("  public static final String REVISION = \"$Revision: 1.38 $\";");
     out.println();
     out.println("  public static final String TABLE_NAME = \"" + tableName.toUpperCase() + "\";");
     out.println();
-    out.println("  public " + className + "DAObject(SessionContainer sessionContainer, Connection dbConn) {");
-    out.println("    super(sessionContainer, dbConn);");
-    out.println("  }");
+    out.println("  private Connection dbConn;");
     out.println();
-    out.println("  protected void initDBSetting() {");
-    out.println("    this.baseTableName = TABLE_NAME;");
-    for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-      out.println("    this.vecDBColumn.add(\"" + rsmd.getColumnName(i) + "\");");
-    }
+    out.println("  public " + className + "DAObject() {");
+    out.println("    ;");
     out.println("  }");
     out.println();
   }
@@ -593,34 +339,30 @@ public class GenerateDAO extends BaseGenerate {
     printHeader();
 
     // Print Select function.
-    printGetObjectByID();
+//    printGetObjectByID();
 
     // Print Get List function.
-    printGetList();
 
     // Print Get List With No Argument function.
-    printGetList1();
 
     // Print Validation functions.
-    printValidation();
 
     // Print Insert function.
     printCreateObject();
 
     // Print Update function.
-    printUpdateObject();
+//    printUpdateObject();
 
     // Print Update function.
-    printDeleteObject();
+//    printDeleteObject();
 
     // Print Prepare Audit Trail function
-    printAuditTrail();
 
     // Print Warning function.
-    printWarning();
+//    printWarning();
 
     // Initialize database connection.
-    closeDBConn();
+//    closeDBConn();
 
     // Print the program footer.
     printFooter();
