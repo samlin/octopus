@@ -1,4 +1,4 @@
-package com.lxitedu.framework.pojo;
+package com.lxitedu.framework.model;
 
 public class ConnectionProperty {
 private String url;
