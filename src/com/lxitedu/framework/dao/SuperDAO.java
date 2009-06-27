@@ -9,20 +9,24 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.dcivision.framework.TextUtility;
-import com.lxitedu.framework.model.ConnectionProperty;
 
 public abstract class SuperDAO {
-  protected Connection conn;
+  protected static Connection conn;
 
   public SuperDAO() {
     super();
   }
 
-  public void initDBConnection() {
 
+  public void addUser(Object obj) throws Exception{
+    initConnection();
+    initUserSpeclAttr(obj);
+    insertDB(obj);
   }
-
-  public abstract ConnectionProperty getConnectionProperty();
+  
+  protected abstract Object insertDB(Object obj);
+  protected abstract void initUserSpeclAttr(Object obj) throws Exception;
+  protected abstract void initConnection();
 
   public abstract String getModelInsertSql();
   // Protected methods for preparing statment for DB operation with NULL values.
@@ -217,8 +221,5 @@ public abstract class SuperDAO {
       return (new Integer(result));
     }
   }
-  public Integer getNextPrimaryID() {
-    // TODO Auto-generated method stub
-    return null;
-  }
+  protected abstract Integer getNextPrimaryID() ;
 }
