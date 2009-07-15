@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import net.sourceforge.pinyin4j.PinyinHelper;
 
 public class DBTools {
   private static Connection con;
@@ -49,6 +50,10 @@ public class DBTools {
 
   public static void main(String[] args) {
     List<SourceUser> list = getAllUsers();
+    for (SourceUser sourceUser : list) {
+      System.out.println(sourceUser.getStudentName() + "pinyin:"
+          + PinyinTools.getStringPinYin(sourceUser.getStudentName()));
+    }
     System.out.println(list);
   }
 }

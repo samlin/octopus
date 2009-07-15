@@ -5,7 +5,7 @@ public class SourceUser {
   private String studentName;
   private String className;
   private String cardID;
-
+ private String loginName;
   public long getId() {
     return id;
   }
@@ -17,9 +17,8 @@ public class SourceUser {
   @Override
   public String toString() {
     return "SourceUser [cardID=" + cardID + ", className=" + className
-        + ", id=" + id + ", studentName=" + studentName + ", getCardID()="
-        + getCardID() + ", getClassName()=" + getClassName() + ", getId()="
-        + getId() + ", getStudentName()=" + getStudentName() + "]";
+        + ", id=" + id + ", loginName=" + loginName + ", studentName="
+        + studentName + "]";
   }
 
   public String getStudentName() {
@@ -44,5 +43,13 @@ public class SourceUser {
 
   public void setCardID(String cardID) {
     this.cardID = cardID;
+  }
+
+  public void setLoginName(String loginName) {
+    this.loginName = loginName;
+  }
+
+  public String getLoginName() {
+    return loginName;
   }
 }
