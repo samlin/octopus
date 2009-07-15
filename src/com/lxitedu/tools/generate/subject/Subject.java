@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.lxitedu.tools.generate.observer.Observer;
+import com.lxitedu.framework.observer.Observer;
 
 public class Subject {
   private List<Observer> observerList = new ArrayList<Observer>();

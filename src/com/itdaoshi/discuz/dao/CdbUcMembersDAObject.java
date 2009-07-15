@@ -11,9 +11,14 @@
  */
 package com.itdaoshi.discuz.dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+
+import org.apache.commons.dbutils.DbUtils;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
 
 import com.itdaoshi.discuz.bean.CdbUcMembers;
 import com.lxitedu.discuz.dao.DiscuzDAO;
@@ -46,8 +51,8 @@ public class CdbUcMembersDAObject extends DiscuzDAO {
     CdbUcMembers obj = (CdbUcMembers) obj1;
     synchronized (conn) {
       try {
-        // Integer nextID = getNextPrimaryID();
-        Integer nextID = 2;
+         Integer nextID = getNextPrimaryID();
+//        Integer nextID = 2;
         sqlStat.append("INSERT ");
         sqlStat
             .append("INTO   CDB_UC_MEMBERS(uid, username, password, email, myid, myidkey, regip, regdate, lastloginip, lastlogintime, salt, secques) ");
@@ -83,8 +88,34 @@ public class CdbUcMembersDAObject extends DiscuzDAO {
   }
 
   @Override
-  protected Integer getNextPrimaryID() {
+  protected Integer getNextPrimaryID()   {
+    QueryRunner run = new QueryRunner();
+    ResultSetHandler h = new ResultSetHandler() {
+      public Object handle(ResultSet rs) throws SQLException {
+          if (!rs.next()) {
+              return null;
+          }
+      
+          ResultSetMetaData meta = rs.getMetaData();
+          int cols = meta.getColumnCount();
+          Object[] result = new Object[cols];
+
+          for (int i = 0; i < cols; i++) {
+              result[i] = rs.getObject(i + 1);
+          }
+
+          return result;
+      }
+  };
+    try{
+      Object[] result = (Object[]) run.query( conn, "SELECT MAX(uid) FROM CDB_UC_MEMBERS ", h);
+      return (Integer)result[0]+1;
+    // do something with the result
+    }catch (Exception e) {
+     e.printStackTrace();
     
+  }  
+
     return null;
   }
 

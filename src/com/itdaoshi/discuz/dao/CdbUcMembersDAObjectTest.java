@@ -9,10 +9,10 @@ public class CdbUcMembersDAObjectTest {
   @Test
   public void testAddUser() throws Exception {
     CdbUcMembers cum=new CdbUcMembers();
-    cum.setUsername("samlinzhang");
+    cum.setUsername("samlinzhang2");
     cum.setEmail("samlinzhang@gmail.com");
     cum.setMyidkey("zhang");
-    cum.setPassword("zhang");
+    cum.setPassword("zhang2");
     cum.setLastlogintime(11111);
     cum.setRegip("192.168.1.249");
     cum.setSecques("");

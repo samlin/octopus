@@ -24,7 +24,7 @@ import java.sql.Types;
 import java.util.Hashtable;
 
 
-import com.lxitedu.tools.generate.observer.Observer;
+import com.lxitedu.framework.observer.Observer;
 
 /**
  * GenerateBean.java

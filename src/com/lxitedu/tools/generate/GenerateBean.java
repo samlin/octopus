@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.Calendar;
 
 
-import com.lxitedu.tools.generate.observer.Observer;
+import com.lxitedu.framework.observer.Observer;
 import com.lxitedu.tools.generate.subject.Subject;
 
 /**
