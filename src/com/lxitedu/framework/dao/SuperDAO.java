@@ -221,5 +221,5 @@ public abstract class SuperDAO {
       return (new Integer(result));
     }
   }
-  protected abstract Integer getNextPrimaryID() ;
+  protected abstract Long getNextPrimaryID() ;
 }
