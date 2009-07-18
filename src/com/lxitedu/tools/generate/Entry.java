@@ -8,7 +8,7 @@ public class Entry {
     String[] initializeData = getGeneralParametar();
 
     // generalAll(subject);
-//     new GenerateBean(subject);
+     new GenerateBean(subject);
      new GenerateDAO(subject);
     // //
 
@@ -33,7 +33,7 @@ public class Entry {
     // initializeData =
     // initializeDataStrBuffer.toString().split(Constant.SEPARATE);// 数据放入数组
 
-    String initializeData[] = { "cdb_uc_members", "discuz" };
+    String initializeData[] = { "user", "dokeos" };
     return initializeData;
   }
 }

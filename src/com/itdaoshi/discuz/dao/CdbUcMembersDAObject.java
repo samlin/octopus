@@ -51,7 +51,7 @@ public class CdbUcMembersDAObject extends DiscuzDAO {
     CdbUcMembers obj = (CdbUcMembers) obj1;
     synchronized (conn) {
       try {
-         Integer nextID = getNextPrimaryID();
+         Long nextID = getNextPrimaryID();
 //        Integer nextID = 2;
         sqlStat.append("INSERT ");
         sqlStat
@@ -88,7 +88,7 @@ public class CdbUcMembersDAObject extends DiscuzDAO {
   }
 
   @Override
-  protected Integer getNextPrimaryID()   {
+  protected Long getNextPrimaryID()   {
     QueryRunner run = new QueryRunner();
     ResultSetHandler h = new ResultSetHandler() {
       public Object handle(ResultSet rs) throws SQLException {
@@ -109,7 +109,7 @@ public class CdbUcMembersDAObject extends DiscuzDAO {
   };
     try{
       Object[] result = (Object[]) run.query( conn, "SELECT MAX(uid) FROM CDB_UC_MEMBERS ", h);
-      return (Integer)result[0]+1;
+      return (Long)result[0]+1;
     // do something with the result
     }catch (Exception e) {
      e.printStackTrace();
