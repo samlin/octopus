@@ -21,7 +21,7 @@ public class JiraInsertService {
     HttpClient client = new HttpClient();
 
     // Create a method instance.
-    String url = "http://192.168.1.254:8080/TestServlet";
+    String url = "http://192.168.1.246:8080/jira/TestServlet";
 //    String url = "http://192.168.1.246:8080/atlassian-jira-3.13.4/TestServlet";
     NameValuePair[] contentreturn = new NameValuePair[5];
     // new NameValuePair("condition", new String(condition.getBytes(),"8859_1"))

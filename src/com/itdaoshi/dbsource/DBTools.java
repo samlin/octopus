@@ -16,7 +16,7 @@ public class DBTools {
   private static Connection con;
 
   public static synchronized Connection getSourceConnection() {
-    String url = "jdbc:mysql://192.168.1.246:3306/lxsm";
+    String url = "jdbc:mysql://192.168.1.250:3306/lxsm";
     if (con != null) {
       return con;
     }
