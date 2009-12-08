@@ -21,7 +21,7 @@ public class ConfluenceInsertService {
 
     // Create a method instance.
 //    String url = "http://192.168.1.246:8080/confluence-3.0.0_01/Admin";
-    String url = "http://192.168.1.246:8080/wiki/Admin";
+    String url = "http://192.168.1.246/wiki/Admin";
 
     NameValuePair[] contentreturn = new NameValuePair[5];
     // new NameValuePair("condition", new String(condition.getBytes(),"8859_1"))

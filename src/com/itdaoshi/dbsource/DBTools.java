@@ -16,13 +16,14 @@ public class DBTools {
   private static Connection con;
 
   public static synchronized Connection getSourceConnection() {
-    String url = "jdbc:mysql://192.168.1.250:3306/lxsm";
+//    String url = "jdbc:mysql://192.168.1.250:3306/lxsm";
+    String url = "jdbc:jtds:sqlserver://192.168.1.249:1433/samlin";
     if (con != null) {
       return con;
     }
     try {
-      Class.forName("com.mysql.jdbc.Driver");
-      con = DriverManager.getConnection(url, "root", "root");
+      Class.forName("net.sourceforge.jtds.jdbc.Driver");
+      con = DriverManager.getConnection(url, "sa", "");
     } catch (Exception e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
