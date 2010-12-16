@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="build" name="AddressBook">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="E:/tools/galileoSR2/eclipse"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.5"/>
+    <property name="source" value="1.5"/>
+    <path id="Apache Tomcat v6.0 [Apache Tomcat v6.0].libraryclasspath">
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/annotations-api.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/catalina-ant.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/catalina-ha.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/catalina-tribes.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/catalina.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/el-api.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/jasper-el.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/jasper-jdt.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/jasper.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/jsp-api.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/servlet-api.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/tomcat-coyote.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/tomcat-dbcp.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/tomcat-i18n-es.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/tomcat-i18n-fr.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/tomcat-i18n-ja.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/log4j-1.2.11.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/commons-logging-1.1.1.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/mysql-connector.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/jta-1.0.1.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/jotm-1.4.3.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/jotm-iiop_stubs-1.4.3.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/jotm-jrmp_stubs-1.4.3.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/ots-jts_1.0.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/jonas_timer-1.4.3.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/carol-1.5.2.jar"/>
+        <pathelement location="E:/tools/apache-tomcat-6.0.20/lib/carol-properties.jar"/>
+    </path>
+    <path id="Web App Libraries.libraryclasspath">
+        <pathelement location="WebContent/WEB-INF/lib/vaadin-6.3.0.jar"/>
+    </path>
+    <path id="EAR Libraries.libraryclasspath"/>
+    <path id="AddressBook.classpath">
+        <pathelement location="build/classes"/>
+        <path refid="Apache Tomcat v6.0 [Apache Tomcat v6.0].libraryclasspath"/>
+        <path refid="Web App Libraries.libraryclasspath"/>
+        <path refid="EAR Libraries.libraryclasspath"/>
+    </path>
+    <target name="init">
+        <mkdir dir="build/classes"/>
+        <copy includeemptydirs="false" todir="build/classes">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="build/classes"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="build/classes" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="AddressBook.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+</project>
