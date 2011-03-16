@@ -23,7 +23,6 @@ import java.sql.Statement;
 import java.sql.Types;
 import java.util.Hashtable;
 
-
 import com.lxitedu.framework.observer.Observer;
 
 /**
@@ -39,36 +38,36 @@ import com.lxitedu.framework.observer.Observer;
 
 public abstract class BaseGenerate implements Observer {
 
-  public static final String         REVISION        = "$Revision: 1.20 $";
+  public static final String REVISION = "$Revision: 1.20 $";
 
-  static String                      author          = null;
-  static String                      srcPath         = null;
-  static String                      driverStr       = null;
-  static String                      dbConnStr       = null;
-  static String                      dbUsername      = null;
-  static String                      dbPassword      = null;
+  static String author = null;
+  static String srcPath = null;
+  static String driverStr = null;
+  static String dbConnStr = null;
+  static String dbUsername = null;
+  static String dbPassword = null;
 
-  static String                      packageName     = "";
-  static String                      rootPackageName = "com.itdaoshi.";
+  static String packageName = "";
+  static String rootPackageName = "com.itdaoshi.";
 
-  static final String                JAVA_INTEGER    = "Integer";
-  static final String                JAVA_DECIMAL    = "Float";
-  static final String                JAVA_STRING     = "String";
-  static final String                JAVA_DATE       = "Timestamp";
+  static final String JAVA_INTEGER = "Integer";
+  static final String JAVA_DECIMAL = "Float";
+  static final String JAVA_STRING = "String";
+  static final String JAVA_DATE = "Timestamp";
 
-  static Connection                  conn            = null;
-  static String                      sqlStat         = null;
-  static Statement                   stat            = null;
-  static ResultSet                   rs              = null;
-  protected static ResultSetMetaData rsmd            = null;
+  static Connection conn = null;
+  static String sqlStat = null;
+  static Statement stat = null;
+  static ResultSet rs = null;
+  protected static ResultSetMetaData rsmd = null;
 
-  static PrintStream                 out             = null;
-  static String                      srcFileName     = null;
-  static String                      tableName       = null;
-  static String                      className       = "";
+  static PrintStream out = null;
+  static String srcFileName = null;
+  static String tableName = null;
+  static String className = "";
 
-  static Hashtable                   exceptionFields = new Hashtable();
-  static boolean                     hasRecordStatus = false;
+  static Hashtable exceptionFields = new Hashtable();
+  static boolean hasRecordStatus = false;
 
   public static void main(String[] argv) throws Exception {
 
@@ -126,8 +125,7 @@ public abstract class BaseGenerate implements Observer {
   protected static void initPropertiesVar() throws FileNotFoundException, IOException {
     // Load properties in the "src" directory.
     java.util.Properties props = new java.util.Properties();
-    String path = new GenerateBean().getClass().getProtectionDomain().getCodeSource().getLocation().toString()
-        .substring(6);
+    String path = new GenerateBean().getClass().getProtectionDomain().getCodeSource().getLocation().toString().substring(6);
     if (!path.endsWith("/")) {
       path += "/";
     }
@@ -240,8 +238,8 @@ public abstract class BaseGenerate implements Observer {
   }
 
   public static String getJavaType(ResultSetMetaData inRSMD, int idx) throws Exception {
-    System.out.println(inRSMD.getColumnName(idx) + ":" + inRSMD.getColumnTypeName(idx) + ":"
-        + inRSMD.getColumnType(idx) + ":" + inRSMD.getPrecision(idx));
+    System.out.println(inRSMD.getColumnName(idx) + ":" + inRSMD.getColumnTypeName(idx) + ":" + inRSMD.getColumnType(idx) + ":"
+        + inRSMD.getPrecision(idx));
     if ((inRSMD.getColumnType(idx) == Types.BIGINT) || (inRSMD.getColumnType(idx) == Types.INTEGER)) { // int
       return (JAVA_INTEGER);
     } else if ((inRSMD.getColumnType(idx) == Types.FLOAT) || (inRSMD.getColumnType(idx) == Types.DECIMAL)
@@ -258,8 +256,8 @@ public abstract class BaseGenerate implements Observer {
   }
 
   public static String getJavaType(ResultSetMetaData inRSMD, int idx, boolean initCapFlag) throws Exception {
-    System.out.println(inRSMD.getColumnName(idx) + ":" + inRSMD.getColumnTypeName(idx) + ":"
-        + inRSMD.getColumnType(idx) + ":" + inRSMD.getPrecision(idx));
+    System.out.println(inRSMD.getColumnName(idx) + ":" + inRSMD.getColumnTypeName(idx) + ":" + inRSMD.getColumnType(idx) + ":"
+        + inRSMD.getPrecision(idx));
     if ((inRSMD.getColumnType(idx) == Types.BIGINT) || (inRSMD.getColumnType(idx) == Types.INTEGER)) { // int
       return (initCapFlag ? capStrInit(JAVA_INTEGER) : JAVA_INTEGER);
     } else if ((inRSMD.getColumnType(idx) == Types.FLOAT) || (inRSMD.getColumnType(idx) == Types.DECIMAL)
@@ -374,7 +372,7 @@ public abstract class BaseGenerate implements Observer {
         }
         result = source.toString();
       } catch (Exception e) {
-      e.printStackTrace();
+        e.printStackTrace();
       }
     }
     return result;
@@ -393,7 +391,6 @@ public abstract class BaseGenerate implements Observer {
 
   protected abstract void setupOutFolder() throws Exception;
 
-  @Override
   public void update(String[] initializeData) throws Exception {
     executeGenerate(initializeData);
 
