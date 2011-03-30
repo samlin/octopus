@@ -14,7 +14,7 @@ public class LxitJiraIssueServiceTest {
 
   @Test
   public void testGetIssueByJql() {
-    RemoteIssue[] issueByJql = lxitJiraService.getIssueByJql("project = DLFIVE AND status = Open");
+    RemoteIssue[] issueByJql = lxitJiraService.getIssueByJql("project = DLSIX  AND status = Open");
     for (RemoteIssue remoteIssue : issueByJql) {
       LxitJiraService.fixIssue(remoteIssue.getKey());
       System.out.println("LxitJiraIssueServiceTest.testGetIssueByJql() key:" + remoteIssue.getKey());
@@ -22,4 +22,12 @@ public class LxitJiraIssueServiceTest {
 
   }
 
+  public static void main(String[] args) {
+    LxitJiraService jirairaService = new LxitJiraService();
+    RemoteIssue[] issueByJql = jirairaService.getIssueByJql("project = DLSIX  AND status = Open");
+    for (RemoteIssue remoteIssue : issueByJql) {
+      LxitJiraService.fixIssue(remoteIssue.getKey());
+      System.out.println("LxitJiraIssueServiceTest.testGetIssueByJql() key:" + remoteIssue.getKey());
+    }
+  }
 }
