@@ -43,6 +43,7 @@ public class LxitClassForm extends Form implements ClickListener {
   private Button bbs = new Button("Bbs", (ClickListener) this);
   private Button ask = new Button("Ask", (ClickListener) this);
   private Button dayProblem = new Button("DayProblem", (ClickListener) this);
+  private Button dayLog = new Button("dayLog", (ClickListener) this);
   private Button gCalendar = new Button("Calendar", (ClickListener) this);
 
   private TextField text = new TextField("日历开始顺序");
@@ -74,6 +75,7 @@ public class LxitClassForm extends Form implements ClickListener {
     footer.addComponent(bbs);
     footer.addComponent(dokeos);
     footer.addComponent(dayProblem);
+    footer.addComponent(dayLog);
     footer.addComponent(text);
     footer.addComponent(gCalendar);
 
@@ -131,11 +133,9 @@ public class LxitClassForm extends Form implements ClickListener {
       } else {
 
         dokeosLxitClassService.add(lxitClass);
-        app.getMainWindow().showNotification("恭喜" + "班级<" + lxitClass.getName() + ">创建创建成功",
-            Notification.TYPE_HUMANIZED_MESSAGE);
+        app.getMainWindow().showNotification("恭喜" + "班级<" + lxitClass.getName() + ">创建创建成功", Notification.TYPE_HUMANIZED_MESSAGE);
         dokeosUserService.addStudentByClassName(lxitClass.getName());
-        app.getMainWindow().showNotification("恭喜", "班级<" + lxitClass.getName() + ">里的学生已经创建成功",
-            Notification.TYPE_HUMANIZED_MESSAGE);
+        app.getMainWindow().showNotification("恭喜", "班级<" + lxitClass.getName() + ">里的学生已经创建成功", Notification.TYPE_HUMANIZED_MESSAGE);
 
       }
     }
@@ -145,8 +145,17 @@ public class LxitClassForm extends Form implements ClickListener {
       LxitClass lxitClass = (LxitClass) bean.getBean();
       LxitJiraService lxitJiraservice = new LxitJiraService();
       lxitJiraservice.createDayProblem(lxitClass);
-      app.getMainWindow().showNotification("恭喜", "班级<" + lxitClass.getName() + ">的每日问题工程已经创建成功",
-          Notification.TYPE_HUMANIZED_MESSAGE);
+      app.getMainWindow().showNotification("恭喜", "班级<" + lxitClass.getName() + ">的每日问题工程已经创建成功", Notification.TYPE_HUMANIZED_MESSAGE);
+    }
+    if (source == dayLog) {
+      BeanItem bean = (BeanItem) getItemDataSource();
+      LxitClass lxitClass = (LxitClass) bean.getBean();
+      LxitJiraService lxitJiraservice = new LxitJiraService();
+      lxitJiraservice.createGroup(lxitClass.getId());
+      lxitJiraservice.createStudnetAndGroup(lxitClass);
+      lxitJiraservice.createDayLogPermissionsAndScheme(lxitClass.getId());
+      lxitJiraservice.createDayLogProject(lxitClass.getId());
+      app.getMainWindow().showNotification("恭喜", "班级<" + lxitClass.getName() + ">的日志工程已经创建成功", Notification.TYPE_HUMANIZED_MESSAGE);
     }
     if (source == ask) {
       BeanItem bean = (BeanItem) getItemDataSource();
@@ -154,8 +163,7 @@ public class LxitClassForm extends Form implements ClickListener {
       AskService lxitJiraservice = new AskService();
       lxitJiraservice.addUsersByClassName(lxitClass.getName());
       ;
-      app.getMainWindow().showNotification("恭喜", "班级<" + lxitClass.getName() + ">的提问系统已经创建成功",
-          Notification.TYPE_HUMANIZED_MESSAGE);
+      app.getMainWindow().showNotification("恭喜", "班级<" + lxitClass.getName() + ">的提问系统已经创建成功", Notification.TYPE_HUMANIZED_MESSAGE);
     }
     if (source == bbs) {
       BeanItem bean = (BeanItem) getItemDataSource();
@@ -163,8 +171,7 @@ public class LxitClassForm extends Form implements ClickListener {
       UCenterService uCenterService = new UCenterService();
       uCenterService.addUsersByClassId(lxitClass.getName());
       ;
-      app.getMainWindow().showNotification("恭喜", "班级<" + lxitClass.getName() + ">的论坛系统已经创建成功",
-          Notification.TYPE_HUMANIZED_MESSAGE);
+      app.getMainWindow().showNotification("恭喜", "班级<" + lxitClass.getName() + ">的论坛系统已经创建成功", Notification.TYPE_HUMANIZED_MESSAGE);
     }
     if (source == gCalendar) {
       DateFormat dateFormatter = DateFormat.getDateInstance(DateFormat.SHORT);
@@ -179,8 +186,7 @@ public class LxitClassForm extends Form implements ClickListener {
       LxitClass lxitClass = (LxitClass) bean.getBean();
       GcalendarService lxitJiraservice = new GcalendarService();
       CalendarEntry calendar = lxitJiraservice.createCalendar("stand" + lxitClass.getName());
-      app.getMainWindow().showNotification("恭喜", "班级<" + lxitClass.getName() + ">的在线日历已经创建成功",
-          Notification.TYPE_HUMANIZED_MESSAGE);
+      app.getMainWindow().showNotification("恭喜", "班级<" + lxitClass.getName() + ">的在线日历已经创建成功", Notification.TYPE_HUMANIZED_MESSAGE);
       GcalendarService gcalendarService = new GcalendarService();
       // Calendar beginCalendar = new GregorianCalendar();
       CourseServiceImpl courseServiceImpl = new CourseServiceImpl();
@@ -240,6 +246,7 @@ public class LxitClassForm extends Form implements ClickListener {
     edit.setVisible(readOnly);
     dokeos.setVisible(readOnly);
     dayProblem.setVisible(readOnly);
+    dayLog.setVisible(readOnly);
     text.setVisible(readOnly);
     gCalendar.setVisible(readOnly);
   }

@@ -7,7 +7,7 @@ public class LxitDataSource extends BasicDataSource {
   public LxitDataSource() {
     this.setDriverClassName("com.mysql.jdbc.Driver");
     this.setUsername("root");
-    this.setPassword("root");
+    this.setPassword("");
     this.setUrl("jdbc:mysql://localhost:3306/lxitdev?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true");
     // this.setDriverClassName("com.mysql.jdbc.Driver");
     // this.setUsername("samlin@192.168.5.249");

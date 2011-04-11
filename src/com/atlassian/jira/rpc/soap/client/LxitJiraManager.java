@@ -85,9 +85,8 @@ public class LxitJiraManager {
     }
   }
 
-  private static RemoteProject getDayLogRemoteProject(String classId) throws RemoteException,
-      RemotePermissionException, RemoteValidationException, RemoteAuthenticationException,
-      com.atlassian.jira.rpc.soap.client.RemoteException {
+  private static RemoteProject getDayLogRemoteProject(String classId) throws RemoteException, RemotePermissionException, RemoteValidationException,
+      RemoteAuthenticationException, com.atlassian.jira.rpc.soap.client.RemoteException {
     RemoteProject project = new RemoteProject();
     project.setKey(createProjectKey(classId, "DL"));
     project.setName("DayLog" + classId);
@@ -103,9 +102,8 @@ public class LxitJiraManager {
     return project;
   }
 
-  private static RemoteProject getDayProblemRemoteProject(String classId) throws RemoteException,
-      RemotePermissionException, RemoteValidationException, RemoteAuthenticationException,
-      com.atlassian.jira.rpc.soap.client.RemoteException {
+  private static RemoteProject getDayProblemRemoteProject(String classId) throws RemoteException, RemotePermissionException,
+      RemoteValidationException, RemoteAuthenticationException, com.atlassian.jira.rpc.soap.client.RemoteException {
     RemoteProject project = new RemoteProject();
     project.setKey(createProjectKey(classId, "DP"));
     project.setName("DayProblem" + classId);
@@ -121,23 +119,19 @@ public class LxitJiraManager {
     return project;
   }
 
-  private static RemotePermissionScheme getPermissionSchemeFromClassId(String classId) throws RemoteException,
-      RemotePermissionException, RemoteValidationException, RemoteAuthenticationException,
-      com.atlassian.jira.rpc.soap.client.RemoteException {
+  private static RemotePermissionScheme getPermissionSchemeFromClassId(String classId) throws RemoteException, RemotePermissionException,
+      RemoteValidationException, RemoteAuthenticationException, com.atlassian.jira.rpc.soap.client.RemoteException {
     RemotePermissionScheme defaultPermScheme = new RemotePermissionScheme();
     defaultPermScheme.setId(new Long(0));
-    j.createPermissionScheme(a, getRemotePermissionSchemeNameByClassId(classId), "this is permissioScheme for "
-        + classId);
+    j.createPermissionScheme(a, getRemotePermissionSchemeNameByClassId(classId), "this is permissioScheme for " + classId);
     return defaultPermScheme;
   }
 
-  private static RemotePermissionScheme getDayProblemPermissionSchemeFromClassId(String classId)
-      throws RemoteException, RemotePermissionException, RemoteValidationException, RemoteAuthenticationException,
-      com.atlassian.jira.rpc.soap.client.RemoteException {
+  private static RemotePermissionScheme getDayProblemPermissionSchemeFromClassId(String classId) throws RemoteException, RemotePermissionException,
+      RemoteValidationException, RemoteAuthenticationException, com.atlassian.jira.rpc.soap.client.RemoteException {
     RemotePermissionScheme defaultPermScheme = new RemotePermissionScheme();
     defaultPermScheme.setId(new Long(0));
-    j.createPermissionScheme(a, getDayProblemRemotePermissionSchemeNameByClassId(classId),
-        "this is permissioScheme for " + classId);
+    j.createPermissionScheme(a, getDayProblemRemotePermissionSchemeNameByClassId(classId), "this is permissioScheme for " + classId);
     return defaultPermScheme;
   }
 
@@ -161,6 +155,13 @@ public class LxitJiraManager {
     map.put("1003", prefex + "1003");
     map.put("1005", prefex + "1005");
     map.put("1006", prefex + "1006");
+    map.put("1101", prefex + "1101");
+    map.put("1102", prefex + "1102");
+    map.put("1103", prefex + "1103");
+    map.put("1105", prefex + "1105");
+    map.put("1106", prefex + "1106");
+    map.put("1107", prefex + "1107");
+    map.put("1108", prefex + "1108");
     return map.get(type);
   }
 
@@ -295,14 +296,10 @@ public class LxitJiraManager {
         RemotePermissionScheme remotePermissionScheme = getPermissionSchemeFromName(getRemotePermissionSchemeNameByClassId(classId));
 
         if (remotePermissionScheme != null) {
-          j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 10L),
-              j.getGroup(a, getGroupNameFromClassName(classId)));
-          j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 11L),
-              j.getGroup(a, getGroupNameFromClassName(classId)));
-          j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 12L),
-              j.getGroup(a, getGroupNameFromClassName(classId)));
-          j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 15L),
-              j.getGroup(a, getGroupNameFromClassName(classId)));
+          j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 10L), j.getGroup(a, getGroupNameFromClassName(classId)));
+          j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 11L), j.getGroup(a, getGroupNameFromClassName(classId)));
+          j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 12L), j.getGroup(a, getGroupNameFromClassName(classId)));
+          j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 15L), j.getGroup(a, getGroupNameFromClassName(classId)));
         }
         System.out.println("update permission success :" + getGroupNameFromClassName(classId));
       } catch (Exception e) {
@@ -380,8 +377,7 @@ public class LxitJiraManager {
     for (String classId : list) {
       try {
         RemoteProject projectByKey = j.getProjectByKey(a, createProjectKey(classId, "DL"));
-        projectByKey
-            .setPermissionScheme(getPermissionSchemeFromClassId(getRemotePermissionSchemeNameByClassId(classId)));
+        projectByKey.setPermissionScheme(getPermissionSchemeFromClassId(getRemotePermissionSchemeNameByClassId(classId)));
         j.updateProject(a, projectByKey);
 
       } catch (Exception e) {
@@ -391,9 +387,8 @@ public class LxitJiraManager {
 
   }
 
-  public static RemotePermissionScheme getPermissionSchemeFromName(String permissionSchemeName) throws RemoteException,
-      RemotePermissionException, RemoteAuthenticationException, com.atlassian.jira.rpc.soap.client.RemoteException,
-      RemoteValidationException {
+  public static RemotePermissionScheme getPermissionSchemeFromName(String permissionSchemeName) throws RemoteException, RemotePermissionException,
+      RemoteAuthenticationException, com.atlassian.jira.rpc.soap.client.RemoteException, RemoteValidationException {
     RemotePermissionScheme[] permissionSchemes = j.getPermissionSchemes(a);
 
     for (int i = 0; i < permissionSchemes.length; i++) {
@@ -440,18 +435,12 @@ public class LxitJiraManager {
       RemotePermissionScheme permission = getPermissionSchemeFromName(getDayProblemRemotePermissionSchemeNameByClassId(classId));
 
       if (permission != null) {
-        j.addPermissionTo(a, permission, new RemotePermission("", PERMISSION_BROWSE),
-            j.getGroup(a, getGroupNameFromClassName(classId)));
-        j.addPermissionTo(a, permission, new RemotePermission("", PERMISSION_CREATE_ISSUE),
-            j.getGroup(a, getGroupNameFromClassName(classId)));
-        j.addPermissionTo(a, permission, new RemotePermission("", PERMISSION_EDIT_ISSUE),
-            j.getGroup(a, getGroupNameFromClassName(classId)));
-        j.addPermissionTo(a, permission, new RemotePermission("", PERMISSION_CLOSE_ISSUE),
-            j.getGroup(a, getGroupNameFromClassName(classId)));
-        j.addPermissionTo(a, permission, new RemotePermission("", PERMISSION_ADD_COMMENT),
-            j.getGroup(a, getGroupNameFromClassName(classId)));
-        j.addPermissionTo(a, permission, new RemotePermission("", PERMISSION_EDIT_OWN_COMMENT),
-            j.getGroup(a, getGroupNameFromClassName(classId)));
+        j.addPermissionTo(a, permission, new RemotePermission("", PERMISSION_BROWSE), j.getGroup(a, getGroupNameFromClassName(classId)));
+        j.addPermissionTo(a, permission, new RemotePermission("", PERMISSION_CREATE_ISSUE), j.getGroup(a, getGroupNameFromClassName(classId)));
+        j.addPermissionTo(a, permission, new RemotePermission("", PERMISSION_EDIT_ISSUE), j.getGroup(a, getGroupNameFromClassName(classId)));
+        j.addPermissionTo(a, permission, new RemotePermission("", PERMISSION_CLOSE_ISSUE), j.getGroup(a, getGroupNameFromClassName(classId)));
+        j.addPermissionTo(a, permission, new RemotePermission("", PERMISSION_ADD_COMMENT), j.getGroup(a, getGroupNameFromClassName(classId)));
+        j.addPermissionTo(a, permission, new RemotePermission("", PERMISSION_EDIT_OWN_COMMENT), j.getGroup(a, getGroupNameFromClassName(classId)));
       }
       System.out.println("update permission success :" + getGroupNameFromClassName(classId));
     } catch (Exception e) {
@@ -557,8 +546,7 @@ public class LxitJiraManager {
 
   public static void batchDeleteIssueFromClassId(String id) {
     try { // Fixme
-      RemoteIssue[] remoteIssues = j
-          .getIssuesFromJqlSearch(a, "project = " + createProjectKey("1001", "DL") + "", 2000);
+      RemoteIssue[] remoteIssues = j.getIssuesFromJqlSearch(a, "project = " + createProjectKey("1001", "DL") + "", 2000);
       for (int i = 0; i < remoteIssues.length; i++) {
         System.out.println("Main.deleteIssue()" + remoteIssues[i]);
         j.deleteIssue(a, remoteIssues[i].getKey());
@@ -576,8 +564,7 @@ public class LxitJiraManager {
   public static void createDayLogPermissionsAndScheme(String classId) {
     RemotePermissionScheme remotePermissionScheme = null;
     try {
-      remotePermissionScheme = j.createPermissionScheme(a, getDayLogPermissionSchemeNameFromClassId(classId), classId
-          + " PermissionScheme Desc");
+      remotePermissionScheme = j.createPermissionScheme(a, getDayLogPermissionSchemeNameFromClassId(classId), classId + " PermissionScheme Desc");
     } catch (RemoteException e) {
       e.printStackTrace();
     }
@@ -592,17 +579,13 @@ public class LxitJiraManager {
     }
   }
 
-  private static void addStudentTeacherAdminPermissionToCurrentPermissionScheme(String classId,
-      RemotePermissionScheme remotePermissionScheme) throws RemoteException, RemotePermissionException,
-      RemoteValidationException, RemoteAuthenticationException, com.atlassian.jira.rpc.soap.client.RemoteException {
-    j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 10L),
-        j.getGroup(a, getGroupNameFromClassName(classId)));
-    j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 11L),
-        j.getGroup(a, getGroupNameFromClassName(classId)));
-    j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 12L),
-        j.getGroup(a, getGroupNameFromClassName(classId)));
-    j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 15L),
-        j.getGroup(a, getGroupNameFromClassName(classId)));
+  private static void addStudentTeacherAdminPermissionToCurrentPermissionScheme(String classId, RemotePermissionScheme remotePermissionScheme)
+      throws RemoteException, RemotePermissionException, RemoteValidationException, RemoteAuthenticationException,
+      com.atlassian.jira.rpc.soap.client.RemoteException {
+    j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 10L), j.getGroup(a, getGroupNameFromClassName(classId)));
+    j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 11L), j.getGroup(a, getGroupNameFromClassName(classId)));
+    j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 12L), j.getGroup(a, getGroupNameFromClassName(classId)));
+    j.addPermissionTo(a, remotePermissionScheme, new RemotePermission("", 15L), j.getGroup(a, getGroupNameFromClassName(classId)));
 
     RemoteGroup teacherGroup = j.getGroup(a, TEACHER_GROUP_NAME);
 
@@ -663,8 +646,7 @@ public class LxitJiraManager {
     return classId + "DayLogPermissionScheme";
   }
 
-  public static void fixIssue(String issueKey) throws Exception, Throwable,
-      com.atlassian.jira.rpc.soap.client.RemoteException, RemoteException {
+  public static void fixIssue(String issueKey) throws Exception, Throwable, com.atlassian.jira.rpc.soap.client.RemoteException, RemoteException {
     RemoteFieldValue[] map = null;
     j.progressWorkflowAction(a, issueKey, "5", map);
   }

@@ -7,10 +7,10 @@ import java.rmi.RemoteException;
 import com.atlassian.jira.rpc.soap.client.JiraSoapService;
 
 public class JiraTools {
-  private static SOAPSession     soapSession = null;
+  private static SOAPSession soapSession = null;
   private static JiraSoapService jiraSoapService;
-  private static String          userName    = "admin";
-  private static String          password    = "hibernateexit3388";
+  private static String userName = "admin";
+  private static String password = "hibernate";
 
   public static String getAuth() {
     SOAPSession soapSession = getSoapSession();
