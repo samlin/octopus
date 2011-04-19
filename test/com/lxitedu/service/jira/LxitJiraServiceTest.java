@@ -25,10 +25,10 @@ public class LxitJiraServiceTest {
 
   }
 
-  // @Test
+  @Test
   public void testCreateStudentFromLxitClass() {
     LxitClass lxitClass = new LxitClass();
-    lxitClass.setId("1102");
+    lxitClass.setId("1101");
     lxitJiraService.createGroup(lxitClass.getId());
     lxitJiraService.createStudnetAndGroup(lxitClass);
 
