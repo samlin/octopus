@@ -4,6 +4,8 @@ import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinOutputFormat;
 import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 
+import com.lxitedu.bean.Student;
+
 public class PinyinTools {
   public static String getStringPinYin(String string) {
     System.out.println("PinyinTools.getStringPinYin() _" + string + "_");
@@ -23,5 +25,9 @@ public class PinyinTools {
     System.out.println("PinyinTools.getStringPinYin() after _" + result + "_");
     return result;
 
+  }
+
+  public static String getLoginNameFromStudent(Student student) {
+    return student.getClassId().toLowerCase() + "." + PinyinTools.getStringPinYin(student.getName());
   }
 }

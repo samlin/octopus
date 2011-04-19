@@ -176,7 +176,7 @@ public class LxitJiraManager {
     RemoteUser user = null;
     for (Iterator<Student> iterator = studentList.iterator(); iterator.hasNext();) {
       Student student = iterator.next();
-      pinyinName = student.getClassId().toLowerCase() + "." + PinyinTools.getStringPinYin(student.getName());
+      pinyinName = PinyinTools.getLoginNameFromStudent(student);
       try {
         // j.deleteUser(a, pinyinName);
       } catch (Exception e) {
@@ -511,7 +511,7 @@ public class LxitJiraManager {
     RemoteUser user = null;
     for (Iterator<Student> iterator = studentList.iterator(); iterator.hasNext();) {
       Student student = iterator.next();
-      pinyinName = student.getClassId().toLowerCase() + "." + PinyinTools.getStringPinYin(student.getName());
+      pinyinName = PinyinTools.getLoginNameFromStudent(student);
       try {
         j.deleteUser(a, pinyinName);
       } catch (Exception e) {

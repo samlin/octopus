@@ -3,6 +3,7 @@ package com.itdaoshi.confluence;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.httpclient.HttpClient;
@@ -14,6 +15,9 @@ import org.apache.commons.httpclient.params.HttpMethodParams;
 
 import com.itdaoshi.dbsource.DBTools;
 import com.itdaoshi.dbsource.SourceUser;
+import com.lxitedu.bean.Student;
+import com.lxitedu.dao.DBManager;
+import com.lxitedu.framework.tools.PinyinTools;
 
 public class ConfluenceInsertService {
   public static void insertUser() throws UnsupportedEncodingException {
@@ -58,21 +62,12 @@ public class ConfluenceInsertService {
     method.setQueryString(contentreturn);
     try {
       try {
-        // Execute the method.
         int statusCode = client.executeMethod(method);
-
         if (statusCode != HttpStatus.SC_OK) {
           System.err.println("Method failed: " + method.getStatusLine());
         }
-
-        // Read the response body.
         byte[] responseBody = method.getResponseBody();
-
-        // Deal with the response.
-        // Use caution: ensure correct character encoding and is not binary
-        // data
         System.out.println(new String(responseBody));
-
       } catch (HttpException e) {
         System.err.println("Fatal protocol violation: " + e.getMessage());
         e.printStackTrace();
@@ -80,23 +75,63 @@ public class ConfluenceInsertService {
         System.err.println("Fatal transport error: " + e.getMessage());
         e.printStackTrace();
       } finally {
-        // Release the connection.
         method.releaseConnection();
       }
       Thread.sleep(200);
       System.out.println("Ececute" + sourceUser.getStudentName());
     } catch (InterruptedException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }
 
-  public static void main(String[] args) {
+  public static void postNewUserFromStudent(Student student) {
+    String url = "http://192.168.1.246:88/wiki/Admin";
+    PostMethod method = new PostMethod(url);
+    HttpClient client = new HttpClient();
+    NameValuePair[] contentreturn = new NameValuePair[5];
+    Student sourceUser = student;
+    NameValuePair loginName = new NameValuePair("loginName", PinyinTools.getLoginNameFromStudent(sourceUser));
+    NameValuePair fullName = new NameValuePair("fullName", sourceUser.getName());
+    NameValuePair password = new NameValuePair("password", PinyinTools.getLoginNameFromStudent(sourceUser));
+    NameValuePair email = new NameValuePair("email", PinyinTools.getLoginNameFromStudent(sourceUser) + "gmail.com");
+    NameValuePair groupName = new NameValuePair("groupName", sourceUser.getClassId());
+    contentreturn[0] = loginName;
+    contentreturn[1] = fullName;
+    contentreturn[2] = password;
+    contentreturn[3] = email;
+    contentreturn[4] = groupName;
+    method.getParams().setParameter(HttpMethodParams.HTTP_CONTENT_CHARSET, "UTF-8");
+    method.setQueryString(contentreturn);
     try {
-      insertUser();
-    } catch (UnsupportedEncodingException e) {
-      // TODO Auto-generated catch block
+      try {
+        int statusCode = client.executeMethod(method);
+        if (statusCode != HttpStatus.SC_OK) {
+          System.err.println("Method failed: " + method.getStatusLine());
+        }
+        byte[] responseBody = method.getResponseBody();
+        System.out.println(new String(responseBody));
+      } catch (HttpException e) {
+        System.err.println("Fatal protocol violation: " + e.getMessage());
+        e.printStackTrace();
+      } catch (IOException e) {
+        System.err.println("Fatal transport error: " + e.getMessage());
+        e.printStackTrace();
+      } finally {
+        method.releaseConnection();
+      }
+      Thread.sleep(200);
+      System.out.println("Ececute" + sourceUser.getName());
+    } catch (InterruptedException e) {
       e.printStackTrace();
     }
+  }
+
+  public static void createUsersFromClassId(String classId) {
+    List<Student> studentList = new LinkedList<Student>();
+    studentList = DBManager.getStudentListFromClassId(classId);
+    for (Student student : studentList) {
+      postNewUserFromStudent(student);
+    }
+
   }
 }
