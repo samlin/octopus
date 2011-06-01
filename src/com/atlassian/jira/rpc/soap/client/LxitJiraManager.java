@@ -654,4 +654,10 @@ public class LxitJiraManager {
   public static RemoteIssue[] getIssuesByJql(String jql) throws Exception, Throwable {
     return j.getIssuesFromJqlSearch(a, jql, 800);
   }
+
+  public static void fixIssueBy1003(String key) throws Exception, RemoteException {
+    RemoteFieldValue[] map = null;
+    j.progressWorkflowAction(a, key, "11", map);
+
+  }
 }
