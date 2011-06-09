@@ -660,4 +660,11 @@ public class LxitJiraManager {
     j.progressWorkflowAction(a, key, "11", map);
 
   }
+
+  public static RemoteIssue getIssueByKey(String string) throws RemotePermissionException, RemoteAuthenticationException,
+      com.atlassian.jira.rpc.soap.client.RemoteException, RemoteException {
+
+    return j.getIssue(a, string);
+
+  }
 }

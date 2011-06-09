@@ -1,8 +1,10 @@
 package com.lxitedu.service.jira;
 
 import com.atlassian.jira.rpc.soap.client.LxitJiraManager;
+import com.atlassian.jira.rpc.soap.client.RemoteAuthenticationException;
 import com.atlassian.jira.rpc.soap.client.RemoteException;
 import com.atlassian.jira.rpc.soap.client.RemoteIssue;
+import com.atlassian.jira.rpc.soap.client.RemotePermissionException;
 import com.lxitedu.bean.LxitClass;
 import com.lxitedu.bean.Student;
 
@@ -92,5 +94,24 @@ public class LxitJiraService {
       e.printStackTrace();
     }
 
+  }
+
+  public RemoteIssue getIssueByKey(String string) {
+    try {
+      return LxitJiraManager.getIssueByKey(string);
+    } catch (RemotePermissionException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (RemoteAuthenticationException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (RemoteException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (java.rmi.RemoteException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return null;
   }
 }

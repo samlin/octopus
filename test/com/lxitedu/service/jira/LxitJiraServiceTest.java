@@ -42,7 +42,7 @@ public class LxitJiraServiceTest {
     // lxitJiraService.createDayLogPermissionsAndScheme(lxitClass.getId());
   }
 
-  @Test
+  // @Test
   public void testCreateDayLogProject() {
     LxitClass lxitClass = new LxitClass();
     lxitClass.setId("1102");
@@ -55,4 +55,5 @@ public class LxitJiraServiceTest {
   public void testModifyIssue() throws Exception {
     lxitJiraService.fixIssue("DLTHREE-4131");
   }
+
 }
