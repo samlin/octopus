@@ -667,4 +667,24 @@ public class LxitJiraManager {
     return j.getIssue(a, string);
 
   }
+
+  public static RemoteProject getProjectByKey(String string) {
+    // TODO Auto-generated method stub
+    try {
+      return j.getProjectByKey(a, string);
+    } catch (RemotePermissionException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (RemoteAuthenticationException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (com.atlassian.jira.rpc.soap.client.RemoteException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    } catch (RemoteException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    return null;
+  }
 }

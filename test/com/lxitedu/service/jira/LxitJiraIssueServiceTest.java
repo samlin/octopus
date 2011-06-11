@@ -22,7 +22,7 @@ public class LxitJiraIssueServiceTest {
 
   }
 
-  // @Test
+  @Test
   public void testFixDayLogBy1003() {
     RemoteIssue[] issueByJql = lxitJiraService.getIssueByJql("project = DL1003  AND status = Open");
     for (RemoteIssue remoteIssue : issueByJql) {
@@ -32,7 +32,7 @@ public class LxitJiraIssueServiceTest {
 
   }
 
-  @Test
+  // @Test
   public void testGetIssueByKey() throws Exception {
     RemoteIssue remoteIssue = lxitJiraService.getIssueByKey("HOMEWORK-3");
     System.out.println("LxitJiraIssueServiceTest.testGetIssueByKey()" + remoteIssue);
