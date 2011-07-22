@@ -1,0 +1,256 @@
+[33mcommit 6636e60dad0e6b609f0bc461f1b0e965a1b8dc5f[m
+Author: samlin <samlinzhang@gmail.com>
+Date:   Thu Jun 30 21:27:09 2011 +0800
+
+    delete the unused lib
+
+[33mcommit a5be0d253b9fb88a9a5d5bb36719a09039e604ed[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Thu Jun 30 13:12:23 2011 +0000
+
+    add some config
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8683 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 04752d5538f71b495ef0396b832a7a1c3c053202[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Sat Jun 11 04:00:43 2011 +0000
+
+    完成测试
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8682 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 33af3f4bc4008d40b81364b51b42deb3f070a5b3[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Thu Jun 9 08:38:06 2011 +0000
+
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8681 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 1d3164b0feef0b92b192d9d25b521b77ad90186b[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Wed Jun 1 08:08:59 2011 +0000
+
+    完成1003的特殊处理
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8677 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 3836f0fc191a8bc782ad08cbbb85371800381200[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Tue Apr 19 04:15:51 2011 +0000
+
+    完成wiki单元测试的完成,已经pingtools的抽取
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8672 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit ad9ac63eb4c941c4a3706030efc3323336d4399d[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Tue Apr 19 02:25:33 2011 +0000
+
+    增加了wiki的单元测试
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8671 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit e331a281246ebb0dd6b3ad1d5a23f848387cc1c2[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Mon Apr 11 09:54:20 2011 +0000
+
+    完成的班级注册功能加在菜单上面,
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8670 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 441d1f3aff99b51cc74c3184813ada6a4bc3ee59[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Mon Apr 11 09:37:05 2011 +0000
+
+    完成的班级注册功能加在菜单上面,并且要把mysql的驱动放到tomcat里面
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8669 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 2c55644a7f12f5d34378cedbbe0627eb6cfe0984[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Wed Mar 30 01:14:11 2011 +0000
+
+    新增了main入口,可以从控制台调用
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8668 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit a5c35e3206cfc0faa92fb5017e2f5c12c4ff42e9[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Wed Mar 16 09:29:02 2011 +0000
+
+    remove the svn error
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8665 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 3ff8a8fec7c635c583a93263808a03e2374905ce[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Thu Dec 23 01:25:27 2010 +0000
+
+    Incomplete - task : jira完成批量审批
+    
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8620 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit fc9944d4bb4c8f63e27f801d4c920311e82c5f7b[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Thu Dec 16 11:08:13 2010 +0000
+
+    init
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8603 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit a4ffb2a97833ce59b7e2a177a9ec3d6ee916b23f[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Thu Mar 25 01:41:25 2010 +0000
+
+    modify select* to some field
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8300 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 1f9f66f7766ac19fc8c279beb4289f1db6ea4a6c[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Thu Mar 25 01:39:55 2010 +0000
+
+    modify to mysql but from excel import
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8299 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit fcc9ab0565956f3e7ece3be6ffafab2d3e7d5b8a[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Tue Dec 8 10:04:06 2009 +0000
+
+    add the sqlserver but notice that must install sqlserver sp2 before connent the sqlserver
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8224 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit c9881ca1529ce2c8f9f5a2d397cd6c137f1a107e[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Mon Aug 31 08:50:52 2009 +0000
+
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8216 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 4ef45e199c1b2afb024d9e71049fc76625545db4[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Mon Aug 31 04:02:28 2009 +0000
+
+    update to 246 server
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@8214 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit fc681ead64b9a2f3d75163b3d98a139b323de23b[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Sat Jul 18 14:52:53 2009 +0000
+
+    complete base dokeos addUser
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@3274 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 0237ce8ba337d06c66438b34b7a255551d56a927[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Sat Jul 18 14:52:05 2009 +0000
+
+    complete base dokeos addUser
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@3273 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 8843cb24303adba5aa9b0ebbcb7f7c1389ec5c1c[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Thu Jul 16 02:47:58 2009 +0000
+
+    complete the confluence user
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@2181 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit f72f6a7be25a0272c5d02771ab84c45d7e357662[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Thu Jul 16 02:47:20 2009 +0000
+
+    complete the jira user insert
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@2178 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit e2dcc41d8d45ce0f8aacf8642a3ac6a1208c7914[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Wed Jul 15 12:57:44 2009 +0000
+
+    complete the pinyin gerenal
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@2081 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 255ae4f56015513ab54b0c5f6a7b762d01db6361[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Wed Jul 15 11:35:02 2009 +0000
+
+    complete the get all source user list
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@2070 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit c5c5a6b57c4dee57ac902845337c559f90e02d77[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Wed Jul 15 09:20:19 2009 +0000
+
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@2049 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit bde21aed6f14dbec82aa0b630401378179599d74[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Sat Jun 27 14:20:13 2009 +0000
+
+    add md5
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@1454 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit c93da8742d91ae31dccb450cd1ecfa0a74af5447[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Fri Jun 26 12:04:51 2009 +0000
+
+    complete the base generale DAO
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@1453 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit b24b14534bd313039ef6287cc1a2a7bff38b7211[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Fri Jun 26 09:47:02 2009 +0000
+
+    first add generate utils
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@1452 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 25cabf0066785aca0d2582364ae1c1d8c9331558[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Fri Jun 26 08:37:14 2009 +0000
+
+    add dbutils
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@1451 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 57b199ed3673cbf5144fcbdf816f8f118d8d5c5b[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Fri Jun 26 07:59:03 2009 +0000
+
+    extract the super DAO
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@1450 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 5fc2c46dd2b124fc71e522367e0b5e14a6eb4228[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Fri Jun 26 07:06:31 2009 +0000
+
+    refact the package
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@1446 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit 86fb0a3882b7bebce67fa63dd5d3f89002b9a10d[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Fri Jun 26 06:51:44 2009 +0000
+
+    init
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@1445 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
+
+[33mcommit e923eceeba25c6bad978f8359ca20d742457dc34[m
+Author: samlin <samlin@7df5b637-c7b4-2643-9bff-991d5fa3ecdc>
+Date:   Fri Jun 26 06:51:24 2009 +0000
+
+    初始导入。
+    
+    git-svn-id: http://192.168.1.235/svn/repo/octopus@1444 7df5b637-c7b4-2643-9bff-991d5fa3ecdc
