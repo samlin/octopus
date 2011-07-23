@@ -11,6 +11,9 @@ public class JiraTools {
 	private static JiraSoapService jiraSoapService;
 	private static String userName = "admin";
 	private static String password = "admin";
+	// private static String baseUrl =
+	// "http://192.168.1.252:8080/rpc/soap/jirasoapservice-v2";;
+	private static String baseUrl = "http://192.168.1.107:8080/rpc/soap/jirasoapservice-v2";;
 
 	public static String getAuth() {
 		SOAPSession soapSession = getSoapSession();
@@ -40,11 +43,6 @@ public class JiraTools {
 		if (soapSession != null) {
 			return soapSession;
 		}
-		// String baseUrl =
-		// "http://127.0.0.1:2990/jira/rpc/soap/jirasoapservice-v2";
-		// String baseUrl =
-		// "http://192.168.1.246:88/jira41/rpc/soap/jirasoapservice-v2";
-		String baseUrl = "http://192.168.1.252:8080/rpc/soap/jirasoapservice-v2";
 		try {
 			soapSession = new SOAPSession(new URL(baseUrl));
 		} catch (MalformedURLException e1) {
